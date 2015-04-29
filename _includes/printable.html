@@ -1,0 +1,14 @@
+<span class="printable">
+
+{% if post %}
+  {% capture url %}assets/printables/{{ post.url | url2filename }}.pdf{% endcapture %}
+{% else %}
+  {% capture url %}assets/printables/{{ page.id | url2filename }}.pdf{% endcapture %}
+{% endif %}
+
+{% if url %}
+  <a href="{{ root_url }}/{{ url }}"> <img src="/assets/images/printer.png" alt="printable version"> </a>
+{% endif %}
+
+
+</span>

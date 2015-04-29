@@ -1,0 +1,43 @@
+# Site settings
+title: Formula Coding
+email: wantee.wang@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://wantee.github.io" # the base hostname & protocol for your site
+author: Wantee Wang
+name: Formula Coding
+twitter_username: wantee
+github_username:  wantee
+
+# Build settings
+markdown: kramdown
+
+permalink: /:year/:month/:day/:title/
+exclude: [Gemfile, Gemfile.lock, misc]
+
+disqus:
+  shortname: wantee
+
+# Jekyll scholar
+scholar:
+  style: apa
+  locale: en
+
+  sort_by: none
+  order: ascending
+
+  source: ./_bibliography
+  bibliography: references.bib
+  bibliography_template: "{{reference}}"
+
+  replace_strings: true
+  join_strings:    true
+
+  details_dir:    bibliography
+  details_layout: bibtex.html
+  details_link:   Details
+
+  query: "@*"
+
+google_universal_analytics: "UA-58316654-2"
+google_universal_analytics_cookiedomain: auto

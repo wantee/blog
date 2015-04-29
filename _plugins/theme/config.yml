@@ -1,0 +1,37 @@
+# Settings for main header
+title: Formula Coding
+subtitle:
+
+# Links for main navigation
+main_nav:
+  - { url: '/', title: 'Posts' }
+  - { url: '/archive/', title: 'Archive' }
+
+# Link labels
+permalink_label: "Permalink"
+read_more_label: "Continue Reading →"
+
+# Show excerpts on post index
+excerpt_posts: true
+# Excerpt linkposts on index
+excerpt_linkposts: false
+
+search: google
+
+sharing:
+  - facebook
+  - twitter
+  - gplus
+  - email
+
+# Defaults to sharing with links (for speed and privacy)
+# To use javascript share buttons, set share_with: buttons
+share_with: links
+
+# Embed comments, options: false, facebook, disqus
+comments: disqus
+
+# Center the text in post and page headings.
+center_headings: true
+
+category_indexes:  true

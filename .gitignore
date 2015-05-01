@@ -4,6 +4,7 @@ _site
 .code-highlighter-cache
 
 _deploy.yml
+.deploy
 
 Gemfile.lock
 

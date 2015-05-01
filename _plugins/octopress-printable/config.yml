@@ -5,3 +5,13 @@ blog_url:            "http://wantee.github.io"
 bibliography_dir:    "_bibliography"
 bibliography:        "references.bib"
 
+# only convert markdowns, without running pandoc and xelatex
+dry_run      :       false
+
+# debug files
+dump_tex_file:       false
+dump_markdown_file:  false
+dump_bib_file:       false
+dump_cmds:           false
+keep_tmp_files:      false
+

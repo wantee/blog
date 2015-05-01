@@ -1,5 +1,7 @@
 _site
 .sass-cache
+.gist-cache
+.code-highlighter-cache
 
 _deploy.yml
 
@@ -18,3 +20,6 @@ assets/printables/
 *.bbl
 *.blg
 *.xdv
+
+.DS_Store
+

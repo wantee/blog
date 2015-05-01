@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-14 15:49:44 +0800
 comments: true
 categories: [Automatic Speech Recognition]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 Feature extraction is the first step for Automatic Speech Recognition(ASR), which converts the waveform speech signal to a set of feature vectors. The main goal is to make the vectors have high discrimination between phonemes.

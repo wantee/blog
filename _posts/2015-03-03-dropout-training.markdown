@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-03 15:18:26 +0800
 comments: true
 categories: [Neural Network]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 * list element with functor item
@@ -25,7 +22,7 @@ There are 2 key points for dropout learning:
 * a) Dropping units while training; 
 * b) Scaling output to be matched between training and testing. 
 
-As shown in following figure {% comment %} FOR-LATEX (\autoref{fig:dropout}) {% endcomment %}, where $p$ is the dropout retention.
+As shown in following figure {{ 'fig:dropout' | latex:autoref }}, where $p$ is the dropout retention.
 
 {% img center /assets/images/posts/Dropout.png "fig:dropout" title:"Dropout" %}
 

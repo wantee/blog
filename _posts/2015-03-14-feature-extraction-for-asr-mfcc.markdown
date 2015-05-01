@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-14 16:55:12 +0800
 comments: true
 categories: [Automatic Speech Recognition]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 * list element with functor item
@@ -44,12 +41,12 @@ If we feed the MFCCs as features to a machine learning algorithm, these lower-or
 
 ## Cepstral Analysis
 
-Formants of a wave carry the identity of the sound. we'd like to extract the formants and a smooth curve connecting them, i.e. the *spectral envelope*, as shown in following figure {% comment %} FOR-LATEX (\autoref{fig:spectral-envelope}) {% endcomment %}(taken from [this slide](http://www.speech.cs.cmu.edu/11-492/slides/03_mfcc.pdf)), 
+Formants of a wave carry the identity of the sound. we'd like to extract the formants and a smooth curve connecting them, i.e. the *spectral envelope*, as shown in following figure {{ 'fig:spectral-envelope' | latex:autoref }}(taken from [this slide](http://www.speech.cs.cmu.edu/11-492/slides/03_mfcc.pdf)), 
 
 {% img center /assets/images/posts/spectral-envelope.png "fig:spectral-envelope" title:"Spectral Envelope" %}
 
 Cepstral analysis is a way to separate the envelope from the spectrum.
-As shown in the figure {% comment %} FOR-LATEX (\autoref{fig:cepstrum}) {% endcomment %}, if we consider the log spectrum as waveform, the frequency(quefrency) of spectral envelope is low, while that of spectral details is high. So we can filter the low frequency region to get envelope.
+As shown in the figure {{ 'fig:cepstrum' | latex:autoref }}, if we consider the log spectrum as waveform, the frequency(quefrency) of spectral envelope is low, while that of spectral details is high. So we can filter the low frequency region to get envelope.
 
 {% img center /assets/images/posts/cepstrum.png "fig:cepstrum" title:"Cepstrum" %}
 
@@ -81,7 +78,7 @@ Now the signal are separated with a simple addition. This procedure is called de
 
 The Mel scale relates perceived frequency, or pitch, of a pure tone to its actual measured frequency. Humans are much better at discerning small changes in pitch at low frequencies than they are at high frequencies. Incorporating this scale makes our features match more closely what humans hear.
 
-This figure {% comment %} FOR-LATEX (\autoref{fig:mel}) {% endcomment %} shows the Mel-scale function. we can see that Mel-scale gives more weight to low frequency regions. The values is came from human perception experiments.
+This figure {{ 'fig:mel' | latex:autoref }} shows the Mel-scale function. we can see that Mel-scale gives more weight to low frequency regions. The values is came from human perception experiments.
 
 {% img center /assets/images/posts/mel.png "fig:mel" title:"Mel scale" %}
 

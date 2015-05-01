@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-11 16:54:37 +0800
 comments: true
 categories: [Neural Network]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 This is a paper about back-propagation algorithm for Neural Network.

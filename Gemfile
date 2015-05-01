@@ -16,4 +16,6 @@ group :jekyll_plugins do
   gem 'octopress-asset-pipeline'
   gem 'octopress-solarized'
   gem 'octopress-genesis-theme'
+  gem 'octopress-printable'
+  gem 'octopress-ink'
 end

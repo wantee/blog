@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-04-27 10:39:02 +0800
 comments: true
 categories: [Machine Learning]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 * list element with functor item
@@ -27,7 +24,7 @@ The truth table for XOR is
 | 1 | 1 |      0      |
 
 
-It is impossible for a classifier with linear decision boundary to learn an XOR function. This can be seen easily by the following plot{% comment %} FOR-LATEX (\autoref{fig:xor}) {% endcomment %}.
+It is impossible for a classifier with linear decision boundary to learn an XOR function. This can be seen easily by the following plot {{ 'fig:xor' | latex:autoref }}.
 
 {% img center /assets/images/posts/xor.png "fig:xor" title:"The XOR Problem" %}
 
@@ -49,7 +46,7 @@ We use [scikit-learn](http://scikit-learn.org/) to perform the experiments. Foll
 
 {% gist 1c74b8336494cb0e9c6d xor-5d.py %}
 
-After running, we see the final decision boundary{% comment %} FOR-LATEX (\autoref{fig:xor-5d}) {% endcomment %},
+After running, we see the final decision boundary {{ 'fig:xor-5d' | latex:autoref }},
 
 {% img center /assets/images/posts/xor-5d.png "fig:xor-5d" title:"Non-linear boundary" %}
 
@@ -59,7 +56,7 @@ It is can be seen that in the final equation \eqref{eq:ellipse}, $A = D$ and $C 
 
 {% gist 1c74b8336494cb0e9c6d xor-3d.py %}
 
-Again, we show the final decision boundary{% comment %} FOR-LATEX (\autoref{fig:xor-3d}) {% endcomment %},
+Again, we show the final decision boundary{{ 'fig:xor-3d' | latex:autoref }},
 
 {% img center /assets/images/posts/xor-3d.png "fig:xor-3d" title:"Non-linear boundary using 3-d features" %}
 

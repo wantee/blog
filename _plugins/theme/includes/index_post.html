@@ -11,7 +11,7 @@
     {% if post.subtitle %}<h2 class="entry-subtitle">{{ post.subtitle }}</h2>{% endif %}
     <div class="entry-meta">
       <a href="{{ post.url | expand_url }}">{{ post.date_html }}</a>
-      {% include printable.html %}
+      {% include octopress-printable:printable.html %}
     </div>
   </header>
 

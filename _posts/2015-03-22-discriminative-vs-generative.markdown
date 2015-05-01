@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-22 22:44:20 +0800
 comments: true
 categories: [Machine Learning]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 Models in Machine Learning can often be divided into two main categories, *Generative* and *Discriminative*.

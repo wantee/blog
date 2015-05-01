@@ -5,10 +5,10 @@ author: Wantee Wang
 date: 2015-03-24 10:05:58 +0800
 comments: true
 categories: [Neural Network]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
+
+* list element with functor item
+{:toc}
 
 Neural Networks are applied in many fields of Machine Learning. Due to their natural property, it is suitable to use them to estimate the *distribution representations* from some knowledge source. This kind of representation may be referred as *knowledge embedding*.
 
@@ -20,7 +20,7 @@ The first successful application of NN-based embedding is [word2vec](https://cod
 
 The inspiration {% cite mikolov2013efficient %} of word2vec is from the observation that neutral network language model can be successfully trained in two steps: first, continuous word vectors are learned using simple model, and then the N-gram NNLM is trained on top of these distributed representations of words. Then the authors spend lots of work on learning word vectors. Thus the word-to-vector procedure can be seen as a feature extraction step for language modelling.
 
-To show the innovation of word2vec, we first consider the traditional N-gram NNLM. The architecture of NNLM {% cite bengio2003neural %} is shown in following figure {% comment %} FOR-LATEX (\autoref{fig:nnlm}) {% endcomment %}
+To show the innovation of word2vec, we first consider the traditional N-gram NNLM. The architecture of NNLM {% cite bengio2003neural %} is shown in following figure {{ 'fig:nnlm' | latex:autoref }},
 
 {% img center /assets/images/posts/nnlm.png "fig:nnlm" title:"Architecture of NNLM" %}
 
@@ -40,7 +40,7 @@ However, if the goal is only to extract word embeddings, we can sacrifice some p
 
 ### Continuous Bag-of-Words(CBOW) Model
 
-There are two type of log-linear models, first one is the bag-of-words model. As the name showed, it don't consider the order of the words in history. The architecture is the same with NNLM, except that the hidden layer is removed and the projection layer is shared for all words (not just the projection matrix), as shown in the figure {% comment %} FOR-LATEX (\autoref{fig:cbow}) {% endcomment %}
+There are two type of log-linear models, first one is the bag-of-words model. As the name showed, it don't consider the order of the words in history. The architecture is the same with NNLM, except that the hidden layer is removed and the projection layer is shared for all words (not just the projection matrix), as shown in the figure {{ 'fig:cbow' | latex:autoref }},
 
 {% img center /assets/images/posts/cbow.png "fig:cbow" title:"Architecture of CBOW" %}
 
@@ -52,7 +52,7 @@ $$
 
 ### Continuous Skip-gram Model
 
-The second model is similar to CBOW, but instead of predicting the current word based on the context, it tries to maximise classification of a word based on another word in the same sentence. More precisely, it uses each current word as an input to a log-linear classifier with continuous projection layer, and predict words within a certain range before and after the current word. The architecture is shown in the following figure {% comment %} FOR-LATEX (\autoref{fig:skip-gram}) {% endcomment %}
+The second model is similar to CBOW, but instead of predicting the current word based on the context, it tries to maximise classification of a word based on another word in the same sentence. More precisely, it uses each current word as an input to a log-linear classifier with continuous projection layer, and predict words within a certain range before and after the current word. The architecture is shown in the following figure {{ 'fig:skip-gram' | latex:autoref }},
 
 {% img center /assets/images/posts/skip-gram.png "fig:skip-gram" title:"Architecture of Skip-gram" %}
 
@@ -84,7 +84,7 @@ After above work, {% cite mikolov2013distributed %} proposed some method to furt
 
 ## Paragraph to Vector
 
-Inspired by word2vec, {% cite le2014distributed %} extends it to transform a variable-length of text to a *paragraph vector*. The architecture is similar with CBOW, as shown in the following figure {% comment %} FOR-LATEX (\autoref{fig:paragraph-vec}) {% endcomment %}, except that the additional paragraph token in input layer, which is mapped to a vector via matrix $D$.
+Inspired by word2vec, {% cite le2014distributed %} extends it to transform a variable-length of text to a *paragraph vector*. The architecture is similar with CBOW, as shown in the following figure {{ 'fig:paragraph-vec' | latex:autoref }}, except that the additional paragraph token in input layer, which is mapped to a vector via matrix $D$.
 
 {% img center /assets/images/posts/paragraph-vec.png "fig:paragraph-vec" title:"Architecture of Paragraph Vector" %}
 

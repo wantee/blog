@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-14 16:57:00 +0800
 comments: true
 categories: [Automatic Speech Recognition]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 In order to use the time dynamic information of speech, One can calculate the *Deltas* and *Delta-Deltas* from the original features.

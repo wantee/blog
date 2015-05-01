@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-02-08 16:56:40 +0800
 comments: true
 categories: [Neural Network]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 * list element with functor item
@@ -260,7 +257,7 @@ $$ \begin{equation} \label{eq:beta}
 
 Note that $\beta\_t(s) = 0, \forall s > 2t$.
 
-Following figure {% comment %} FOR-LATEX (\autoref{fig:alpha-beta}) {% endcomment %} illustrate the forward backward algorithm applied to the labelling 'CAT'(from the paper).
+Following figure {{ 'fig:alpha-beta' | latex:autoref }} illustrate the forward backward algorithm applied to the labelling 'CAT'(from the paper).
  
 {% img center /assets/images/posts/CTC-alpha-beta.png "fig:alpha-beta" title:"Alpha-Beta Algorithm" %}
 
@@ -354,7 +351,7 @@ By modifying the forward variables, this method can efficiently calculate the pr
 
 Prefix search decoding is a best-first search through the tree of labellings, 
 where the children of a given labelling are those that share it as a prefix. 
-At each step the search extends the labelling whose children have the largest cumulative probability (see below figure{% comment %} FOR-LATEX (\autoref{fig:prefix-search-decoding}) {% endcomment %}).
+At each step the search extends the labelling whose children have the largest cumulative probability (see below figure {{ 'fig:prefix-search-decoding' | latex:autoref }}).
 
 {% img center /assets/images/posts/CTC-prefix-decoding.png "fig:prefix-search-decoding" title:"Prefix Search Decoding" %}
 

@@ -1,0 +1,7 @@
+posts_dir:           "_posts"
+printables_dir:      "assets/printables"
+source_dir:          "."
+blog_url:            "http://wantee.github.io"
+bibliography_dir:    "_bibliography"
+bibliography:        "references.bib"
+

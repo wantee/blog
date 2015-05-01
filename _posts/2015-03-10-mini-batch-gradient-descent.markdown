@@ -5,9 +5,6 @@ author: Wantee Wang
 date: 2015-03-10 21:44:23 +0800
 comments: true
 categories: [ Gradient Descent ]
-header-includes:
-   - \usepackage{graphicx}
-   - \usepackage[all]{hypcap}
 ---
 
 In Mini-Batch Learning, we update the parameter $\mathbf{w}$ every $b$ examples. There are two ways to do the update.

@@ -1,4 +1,11 @@
 ---
 layout: {{ layout }}
 title: {{ title }}
+author: Wantee Wang
+comments: true
+categories:
 ---
+
+* list element with functor item
+{:toc}
+

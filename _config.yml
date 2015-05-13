@@ -41,3 +41,6 @@ scholar:
 
 google_universal_analytics: "UA-58316654-2"
 google_universal_analytics_cookiedomain: auto
+
+post_layout: "theme:post"
+page_layout: "theme:page"

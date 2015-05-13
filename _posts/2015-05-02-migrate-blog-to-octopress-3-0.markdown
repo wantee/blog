@@ -17,3 +17,5 @@ The migrating process is a bit of suffering, because there is no official guide,
 In sum, I'm happy to extract the codes generating pdf files from `Rakefile` to a more appropriate [octopress ink plugin](https://github.com/wantee/octopress-printable).
 
 Another thing I impressed is the test framework, the idea is simply but powerful. I'm considering to write or find a test framework for my other C projects.
+
+Update: I write a Bash script testing framework, which can be found in [here](https://github.com/wantee/shutils.git).

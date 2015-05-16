@@ -7,6 +7,10 @@ main_nav:
   - { url: '/', title: 'Posts' }
   - { url: '/archive/', title: 'Archive' }
 
+titles:
+  post_index: ''
+  post_archive: 'Archive'
+
 # Link labels
 permalink_label: "Permalink"
 read_more_label: "Continue Reading →"

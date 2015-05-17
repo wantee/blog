@@ -4,12 +4,13 @@ subtitle:
 
 # Links for main navigation
 main_nav:
-  - { url: '/', title: 'Posts' }
   - { url: '/archive/', title: 'Archive' }
+  - { url: '/categories/', title: 'Categories' }
 
 titles:
   post_index: ''
   post_archive: 'Archive'
+  category_index: 'Posts in :category'
 
 # Link labels
 permalink_label: "Permalink"

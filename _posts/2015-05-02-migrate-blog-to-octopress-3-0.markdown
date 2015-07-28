@@ -4,6 +4,7 @@ title: Migrate Blog to Octopress 3.0
 date: 2015-05-02T00:25:37+08:00
 author: Wantee Wang
 comments: true
+noprintable: true
 categories: [Technology]
 ---
 

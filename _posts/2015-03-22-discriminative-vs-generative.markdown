@@ -13,6 +13,8 @@ The fundamental difference between them is:
 * Discriminative models learn the (hard or soft) boundary between classes
 * Generative models model the distribution of individual classes
 
+<!-- more -->
+
 In mathematics, discriminative models directly estimate posterior probabilities $P(y\mathop{\|}x)$, while generative models model class-conditional pdfs $p(x\mathop{\|}y)$ and prior probabilities $P(y)$, therefore the joint probability distributions $p(x,y)$.
 
 Generative models often make some assumption on the underlying probability distributions and model it. Thus it is can be used to generate new samples from the learned distribution.

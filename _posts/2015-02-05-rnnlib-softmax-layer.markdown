@@ -15,6 +15,8 @@ $\log$ of softmax with respect to weights. However,
 the RNNLIB shows that we can actually factorize the network into single layers. In this post, 
 we look into the Softmax Layer.
 
+<!-- more -->
+
 ## Fundamentals
 
 ### List of Symbols

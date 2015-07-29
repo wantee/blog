@@ -9,6 +9,8 @@ categories: [Automatic Speech Recognition]
 
 In order to use the time dynamic information of speech, One can calculate the *Deltas* and *Delta-Deltas* from the original features.
 
+<!-- more -->
+
 Also known as *differential* and *acceleration* coefficients, they are computed as,
 
 $$

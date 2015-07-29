@@ -9,6 +9,8 @@ categories: [Automatic Speech Recognition]
 
 Feature extraction is the first step for Automatic Speech Recognition(ASR), which converts the waveform speech signal to a set of feature vectors. The main goal is to make the vectors have high discrimination between phonemes.
 
+<!-- more -->
+
 Thus, the features should be
 
 * perceptually meaningful, i.e., analogous to features used by human auditory system.

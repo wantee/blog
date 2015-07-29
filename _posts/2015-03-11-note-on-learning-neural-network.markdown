@@ -9,6 +9,8 @@ categories: [Neural Network]
 
 This is a paper about back-propagation algorithm for Neural Network.
 
+<!-- more -->
+
 The table of contents is
 
 {% comment %} FOR-TOC {% endcomment %}

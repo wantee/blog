@@ -12,6 +12,8 @@ categories: [Automatic Speech Recognition]
 
 *Pitch* is a perceptual property that allows the ordering of sounds on a frequency-related scale. Pitch may be quantified as a frequency, which is referred as *Fundamental frequency* (F0). Pitch and pitch changes in words form the *tone* of a tonal language, such as Chinese.
 
+<!-- more -->
+
 RAPT{% cite talkin1995robust %} is a time-domain algorithm for F0 estimation, which Kaldi's pitch feature {% cite ghahremani2014pitch %} is based on.
 
 Most F0 estimators consist of three main steps:

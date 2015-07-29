@@ -15,6 +15,8 @@ Most materials are from [Srivastava's page](http://www.cs.toronto.edu/~nitish/dr
  
 It prevents overfitting and provides a way of approximately combining exponentially many different neural network architectures efficiently. The term *dropout* refers to dropping out units (hidden and visible) in a neural network.
 
+<!-- more -->
+
 ## The Method
 
 There are 2 key points for dropout learning: 

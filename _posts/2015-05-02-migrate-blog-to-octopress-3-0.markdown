@@ -13,6 +13,8 @@ After 4 days coding, finally get to migrate this blog to new [Octopress 3.0](htt
 
 Octopress 3.0 is not just a upgraded version of Octopress 2.x. In 3.0, everything is separated into standalone gems, which can be used on any Jekyll site. Thus there will no longer be a division between Octopress and Jekyll.
 
+<!-- more -->
+
 The migrating process is a bit of suffering, because there is no official guide, and also I'm a newbie to the whole Ruby world. But on the other hand, I learned a lot, including both Ruby programming and open source project tools, such as [RubyGems](https://rubygems.org/) and [Travis CI](https://travis-ci.org/).
 
 In sum, I'm happy to extract the codes generating pdf files from `Rakefile` to a more appropriate [octopress ink plugin](https://github.com/wantee/octopress-printable).

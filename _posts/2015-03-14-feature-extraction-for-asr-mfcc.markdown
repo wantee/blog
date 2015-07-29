@@ -12,6 +12,8 @@ categories: [Automatic Speech Recognition]
 
 Mel-frequency cepstral coefficients (MFCCs) is a popular feature used in Speech Recognition system. It is based on a concept called cepstrum.
 
+<!-- more -->
+
 The crucial observation leading to the cepstrum terminology is thatnthe log spectrum can be treated as a waveform and subjected to further Fourier analysis.
 The term *<u>ceps</u>trum* is coined by swapping the order of the letters in the word *<u>spec</u>trum*. Likewise, the name of the independent variable of the cepstrum is known as a *<u>quef</u>rency*.
 

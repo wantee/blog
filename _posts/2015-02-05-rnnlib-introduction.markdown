@@ -10,6 +10,8 @@ categories: [Neural Network]
 RNNLIB is a recurrent neural network library for sequence learning problems,
 which is written by [Alex Graves](http://www.cs.toronto.edu/~graves/).
 
+<!-- more -->
+
 In [this paper](http://www6.in.tum.de/pub/Main/Publications/Graves2006a.pdf),
 Graves proposed the CTC(Connectionist Temporal Classification), 
 which allows the system to transcribe unsegmented sequence data. 

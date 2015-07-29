@@ -12,6 +12,8 @@ categories: [Machine Learning]
 
 The XOR is an interesting problem, not only because it is a classical example for *Linear Separability*, but also it played a significant role in the history of neutral network research.
  
+ <!-- more -->
+ 
 ## Probelm
 
 The truth table for XOR is

@@ -12,6 +12,8 @@ categories: [Neural Network]
 
 Neural Networks are applied in many fields of Machine Learning. Due to their natural property, it is suitable to use them to estimate the *distribution representations* from some knowledge source. This kind of representation may be referred as *knowledge embedding*.
 
+<!-- more -->
+
 [Embedding](http://en.wikipedia.org/wiki/Embedding), mathematically, denotes one instance of some mathematical structure contained within another instance. In Machine Learning context, it often means to transfer a sparse coding of an instance to a more dense coding, e.g., a 1-of-V coding to a low dimension vector.
 
 ## Word2Vec

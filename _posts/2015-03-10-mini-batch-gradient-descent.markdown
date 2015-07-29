@@ -9,6 +9,8 @@ categories: [ Gradient Descent ]
 
 In Mini-Batch Learning, we update the parameter $\mathbf{w}$ every $b$ examples. There are two ways to do the update.
 
+<!-- more -->
+
 First, using the summation of all examples in the mini-batch, i.e.,
 
 $$\begin{equation}\label{eq:sum}

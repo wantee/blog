@@ -13,6 +13,8 @@ categories: [ Probability Theory ]
 
 *Pseudo-random number sampling* is the numerical practice of generating pseudo-random numbers that are distributed according to a given probability distribution.
 
+<!-- more -->
+
 It is hard to design a algorithm to directly sample a random variable from a pdf in a high-dimension space. So We first restrict ourself to the simpler problem: drawing a sample from uniform distribution on $[0,1]$. Once we solve that, we can easily extends it to uniform distribution on any interval by scaling.
 
 ## Uniform distribution on [0,1]

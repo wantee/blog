@@ -4,6 +4,7 @@ title: 新概念素描
 date: 2015-05-29T23:32:27+08:00
 author: Wantee Wang
 comments: true
+noprintable: true
 categories: [ life ]
 ---
 

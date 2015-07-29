@@ -1,9 +1,10 @@
 ---
-layout: {{ layout }}
-title: {{ title }}
+layout: "{{ layout }}"
+title: "{{ title }}"
 date: {{ date }}
 author: Wantee Wang
 comments: true
+noprintable: false
 categories:
 ---
 

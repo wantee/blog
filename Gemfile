@@ -12,6 +12,7 @@ end
 group :jekyll_plugins do
   gem 'jekyll-scholar'
   gem 'octopress-image-tag'
+  gem 'octopress-codefence'
   gem 'octopress-gist'
   gem 'octopress-asset-pipeline'
   gem 'octopress-solarized'
@@ -20,4 +21,5 @@ group :jekyll_plugins do
   gem 'octopress-printable', '>= 0.1.2'
   gem 'octopress-category-list'
   gem 'octopress-ink'
+  gem 'octopress-tex2img'
 end

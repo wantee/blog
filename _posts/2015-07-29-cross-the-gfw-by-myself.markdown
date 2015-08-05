@@ -50,4 +50,11 @@ GoAgentX 自带 PAC 功能，可以方便系统全局的配置。从上面的 Sw
 
 现在这种用法相比曲径还是麻烦一些，主要是需要装一个客户端。知乎有一个分析曲径的[答案](http://www.zhihu.com/question/22378456)，大概是说，在国内租一些 VPS（阿里云），然后在阿里云上运行客户端，然后本地就只需要一个 pac 配置连客户端就可以了。这样客户端的 VPS 就可以做很多其他的事情了，比如分流，防攻击等。
 
-为了同步 pac 的方便，确实可以采用这种方法，在 VPS 再搭一个 PAC server，所以客户端都去那里下载。
+为了同步 pac 的方便，确实可以采用这种方法，在 VPS 上再搭一个 PAC server，所以客户端都去那里下载。
+
+
+Update 2015/07/30: 
+
+## 配置 Mail.app
+
+Mac 自带的 Mail.app 不能单独设置代理，用全局的 SOCKS5 代理又没有 pac 的功能。所以下了一个 [Proxifier](https://www.proxifier.com) 配置 SOCKS5 代理。

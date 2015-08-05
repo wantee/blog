@@ -18,8 +18,8 @@ group :jekyll_plugins do
   gem 'octopress-solarized'
   gem 'octopress-genesis-theme'
   gem 'octopress-font-awesome'
-  gem 'octopress-printable', '>= 0.1.2'
+  gem 'octopress-printable', '>= 0.1.4'
   gem 'octopress-category-list'
   gem 'octopress-ink'
-  gem 'octopress-tex2img'
+  gem 'octopress-tex2img', '>= 0.1.2'
 end

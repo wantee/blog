@@ -1,0 +1,107 @@
+\documentclass{standalone}
+\usepackage{tikz} 
+  
+\begin{document}
+
+\begin{tikzpicture}
+  \input{common.tex}
+  
+  \pgfmathsetmacro{\pht}{.8} % projection vector height
+  \pgfmathsetmacro{\pd}{0.2} % distance between projection vectors
+  \pgfmathsetmacro{\lpd}{.1} % distance between projection vectors and projection layer
+  \pgfmathsetmacro{\tpht}{\pht * 4 + \pd * 3 + 2 * \lpd} % total projection vector height
+  \pgfmathsetmacro{\pwid}{\lwid + 2*\lpd} % projection layer width
+  
+  \pgfmathsetmacro{\mid}{2*\wht + 1.5*\wdd)}
+      
+  \begin{scope}[every path/.style={thick, >=latex, ->}]
+
+   \pgfmathsetmacro{\x}{0}
+   \pgfmathsetmacro{\y}{0}   
+   % Word layer
+    \foreach \i in {1,...,4} {
+      \pgfmathsetmacro{\y}{(\i-1)*(\wht + \wdd)}
+          
+      \pgfmathparse{(\i==3)?1:0}
+      \ifdim\pgfmathresult pt>0pt {%
+        \path (\x, \y) --  +(\lwid, \wht) node[midway] {$\vdots$};
+      } \else {%
+        \draw (\x, \y) rectangle +(\lwid, \wht);
+
+        \pgfmathparse{(\i==4)?1:0}
+        \ifdim\pgfmathresult pt>0pt {%
+          \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$w(t-n)$};
+        } \else {%
+          \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$w(t-\pgfmathprintnumber{\i})$};
+        } %
+        \fi
+      } %
+      \fi
+    }
+    
+    % Projection layer
+    \pgfmathsetmacro{\x}{\x + \ld}
+    \pgfmathsetmacro{\y}{\mid - \tpht / 2} 
+    \draw (\x, \y) rectangle +(\pwid, \tpht);
+    \path (\x, \y) --  +(\pwid, 0) node[midway, below] {$\mathbf{x}$};
+    
+    \pgfmathsetmacro{\x}{\x + \lpd}
+    \pgfmathsetmacro{\y}{\y + \lpd - (\pd + \pht)}
+    \foreach \i in {1,...,4} {
+      \pgfmathsetmacro{\y}{\y + \i * (\pd + \pht)}
+      
+      \pgfmathparse{(\i==3)?1:0}
+      \ifdim\pgfmathresult pt>0pt {%
+        \path (\x, \y) --  +(\lwid, \pht) node[midway] {$\vdots$};
+      } \else {%
+        \draw (\x, \y) rectangle +(\lwid, \pht);
+      } %
+      \fi
+    }
+    
+    %% connect
+    \pgfmathsetmacro{\px}{\lwid}
+    \pgfmathsetmacro{\qx}{\lpd + \ld}
+    \pgfmathsetmacro{\py}{\wht / 2}
+    \pgfmathsetmacro{\qy}{\mid - \tpht / 2  + \lpd + \pht / 2} 
+    \foreach \i in {1,...,4} {
+      \pgfmathsetmacro{\py}{\py + (\i - 1) * (\wht + \wdd)}
+      \pgfmathsetmacro{\qy}{\qy + (\i - 1) * (\pht + \pd)} 
+      
+      \pgfmathparse{(\i==3)?1:0}
+      \ifdim\pgfmathresult pt=0pt {%
+        \draw (\px, \py) -- (\qx, \qy) node[midway, above, sloped] {$\mathbf{C}$};
+      } %
+      \fi
+    }
+    
+    % Hidden layer
+    \pgfmathsetmacro{\x}{\x + \ld}
+    \pgfmathsetmacro{\y}{\mid - \hht / 2} 
+    \draw (\x, \y) rectangle +(\lwid, \hht);
+    \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$\mathbf{h}$};
+    
+    %% connect
+    \pgfmathsetmacro{\px}{\px - \lwid + \ld + \pwid}
+    \pgfmathsetmacro{\qx}{\qx + \ld}
+    \pgfmathsetmacro{\py}{\mid}
+    \pgfmathsetmacro{\qy}{\mid} 
+    \draw (\px, \py) -- (\qx, \qy) node[midway, above] {$\mathbf{H}$};
+    
+    % Output layer
+    \pgfmathsetmacro{\x}{\x + \ld}
+    \pgfmathsetmacro{\y}{\mid - \wht / 2} 
+    \draw (\x, \y) rectangle +(\lwid, \wht);
+    \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$\mathbf{y}$};
+    
+    %% connect
+    \pgfmathsetmacro{\px}{\px - \pwid + \lpd + \ld + \lwid}
+    \pgfmathsetmacro{\qx}{\qx + \ld}
+    \pgfmathsetmacro{\py}{\mid}
+    \pgfmathsetmacro{\qy}{\mid} 
+    \draw (\px, \py) -- (\qx, \qy) node[midway, above] {$\mathbf{U}$};   
+  \end{scope}  
+
+\end{tikzpicture}
+
+\end{document}

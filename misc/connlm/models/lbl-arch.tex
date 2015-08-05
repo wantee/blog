@@ -1,0 +1,73 @@
+\documentclass{standalone}
+\usepackage{tikz} 
+  
+\begin{document}
+
+\begin{tikzpicture}
+  \input{common.tex}
+  
+  \pgfmathsetmacro{\mid}{2*\wht + 1.5*\wdd)}
+      
+  \begin{scope}[every path/.style={thick, >=latex, ->}]
+
+   \pgfmathsetmacro{\x}{0}
+   \pgfmathsetmacro{\y}{0}   
+   % Word layer
+    \foreach \i in {1,...,4} {
+      \pgfmathsetmacro{\y}{(\i-1)*(\wht + \wdd)}
+          
+      \pgfmathparse{(\i==3)?1:0}
+      \ifdim\pgfmathresult pt>0pt {%
+        \path (\x, \y) --  +(\lwid, \wht) node[midway] {$\vdots$};
+      } \else {%
+        \draw (\x, \y) rectangle +(\lwid, \wht);
+
+        \pgfmathparse{(\i==4)?1:0}
+        \ifdim\pgfmathresult pt>0pt {%
+          \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$w(t-n)$};
+        } \else {%
+          \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$w(t-\pgfmathprintnumber{\i})$};
+        } %
+        \fi
+      } %
+      \fi
+    }
+    
+    % Hidden layer
+    \pgfmathsetmacro{\x}{\x + \ld}
+    \pgfmathsetmacro{\y}{\mid - \hht / 2} 
+    \draw (\x, \y) rectangle +(\lwid, \hht);
+    \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$\mathbf{x}$};
+    
+    %% connect
+    \pgfmathsetmacro{\px}{\lwid}
+    \pgfmathsetmacro{\qx}{\ld}
+    \pgfmathsetmacro{\py}{\wht / 2}
+    \pgfmathsetmacro{\qy}{\mid} 
+    \foreach \i in {1,...,4} {
+      \pgfmathsetmacro{\py}{\py + (\i - 1) * (\wht + \wdd)}
+      
+      \pgfmathparse{(\i==3)?1:0}
+      \ifdim\pgfmathresult pt=0pt {%
+        \draw (\px, \py) -- (\qx, \qy) node[midway, above, sloped] {$\mathbf{C_{\pgfmathprintnumber{\i}}}$};
+      } %
+      \fi
+    }
+    
+    % Output layer
+    \pgfmathsetmacro{\x}{\x + \ld}
+    \pgfmathsetmacro{\y}{\mid - \wht / 2} 
+    \draw (\x, \y) rectangle +(\lwid, \wht);
+    \path (\x, \y) --  +(\lwid, 0) node[midway, below] {$\mathbf{y}$};
+    
+    %% connect
+    \pgfmathsetmacro{\px}{\px + \ld}
+    \pgfmathsetmacro{\qx}{\qx + \ld}
+    \pgfmathsetmacro{\py}{\mid}
+    \pgfmathsetmacro{\qy}{\mid} 
+    \draw (\px, \py) -- (\qx, \qy) node[midway, above] {$\mathbf{U}$};   
+  \end{scope}  
+
+\end{tikzpicture}
+
+\end{document}

@@ -47,3 +47,28 @@ page_layout: "theme:page"
 
 excerpt_separator: "<!-- more -->"
 
+mini_magick:
+  gel_pen_thumbnail:
+    source: assets/images/galleries/gel_pen
+    destination: assets/images/galleries/gel_pen/thumbs
+    commands:
+      - thumbnail: "140x140^"
+      - crop: "140x140-0x0"
+  gel_pen_medium:
+    source: assets/images/galleries/gel_pen
+    destination: assets/images/galleries/gel_pen/medium
+    commands:
+      - resize: "600x400" 
+
+  colored_pencil_thumbnail:
+    source: assets/images/galleries/colored_pencil
+    destination: assets/images/galleries/colored_pencil/thumbs
+    commands:
+      - thumbnail: "140x140^"
+      - crop: "140x140-0x0"
+  colored_pencil_medium:
+    source: assets/images/galleries/colored_pencil
+    destination: assets/images/galleries/colored_pencil/medium
+    commands:
+      - resize: "600x400" 
+

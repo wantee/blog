@@ -1,0 +1,12 @@
+---
+layout: theme:default
+paginate: true
+---
+<div class="post-index">
+  {% for post in paginator.posts %}
+    {% if post.hidden %}
+    {% else %}
+      {% include theme:index_post.html %}
+    {% endif %}
+  {% endfor %}
+</div>

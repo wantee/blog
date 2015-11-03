@@ -1,0 +1,294 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{amsmath}
+\usepackage[fleqn]{mathtools}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\addtobeamertemplate{background canvas}{\transfade}{}
+
+\title{Weighted Prediction Error Algorithm}
+\author{Wang Jian}
+\date{October 30, 2015}
+
+\begin{document}
+
+\setbeamercovered{transparent}
+
+\frame{\titlepage}
+
+\section[Outline]{}
+\frame{\tableofcontents}
+
+\section{Introduction}
+\subsection{Speech Dereverbration}
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item<1-3>{Blind Deconvolution}
+      \begin{itemize}
+      \item<2>{Blind} 
+      
+        Depends solely on observed signal $y[n]$
+      
+      \item<3>{Deconvolution} 
+      
+        Model speech source and channel explicitly
+      
+      \end{itemize}
+ 
+  \item<4>{Statistical Model-Based Approach}
+  
+    \begin{tikzpicture}
+    \node [draw] (source) {Source Model $P_S(s)$};
+    \node [draw, right=of source] (channel) {Channel Model $P_{Y|S}(y|s)$};
+    \node [right=of channel] (end) {};
+    
+    \path [draw, ->] (source) -- node[above]{$s[n]$} (channel);
+    \path [draw, ->] (channel) -- node[above]{$y[n]$} (end);
+  \end{tikzpicture}
+
+  \end{itemize}
+}
+
+\section{Weighted Prediction Error Algorithm(WPE)}
+\subsection{Speech Generation Model}
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item{Time-Varying Gaussian Model(TVG)}
+
+   \begin{align*}
+      p(s; \Phi) = \prod^{L-1}_{l=0}\prod^{N-1}_{n=0}p(s_{n,l}; \Phi)
+   \end{align*}
+   
+   \begin{align*}
+      p(s_{n,l}; \Phi) &= f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l}) \\
+                                 &= \frac{1}{\pi\lambda_{n,l}}e^{-\frac{|s_{n,l}|^2}{\lambda_{n,l}}}\\
+   \end{align*}
+   
+   \end{itemize}
+}
+
+\subsection{Acoustical Transmission Channel Model}
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item{\small{Multiple-Input Single-Output AutoRegressive Model(MISO AR)}}
+
+   \begin{align*}
+      y_{1,n,l} = \sum_{k=\Delta_l}^{\Delta_l+K_l-1}\mathbf{g}^{H}_{k,l} \mathbf{y}_{n-k,l} + s_{n,l}
+   \end{align*}
+   
+   \begin{align*}
+      p(y|s; \Psi) = \prod^{L-1}_{l=0}\prod^{N-1}_{n=0}p(y_{1,n,l} | \mathbf{y}_{n-\Delta_l,l}, \cdots, \mathbf{y}_{n-\Delta_l-K_l+1,l}, s_{n,l}; \Psi)
+   \end{align*}
+   
+   \begin{multline*}
+      p(y_{1,n,l} | \mathbf{y}_{n-\Delta_l,l}, \cdots, \mathbf{y}_{n-\Delta_l-K_l+1,l}, s_{n,l}; \Psi) = \\
+                              \delta(y_{1,n,l} - \sum_{k=\Delta_l}^{\Delta_l+K_l-1}\mathbf{g}^{H}_{k,l} \mathbf{y}_{n-k,l} - s_{n,l})
+   \end{multline*}
+   
+   \end{itemize}
+}
+
+\subsection{WPE Algorithm}
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item{MLE Objective Function}
+
+   \begin{align*}
+      \mathcal{L}(\Phi, \Psi) &= - \log p(y; \Phi, \Psi) \\
+                                            &= - \log \int_s p(y, s; \Phi, \Psi) \\
+                                            &= \begin{multlined}[t]
+                                                      - \log \int_s \prod^{L-1}_{l=0}\prod^{N-1}_{n=0}(\delta(y_{1,n,l} - \sum_{k=\Delta_l}^{\Delta_l+K_l-1}\mathbf{g}^{H}_{k,l} \mathbf{y}_{n-k,l} - s_{n,l}) \\
+                                                                                                                                 \shoveleft[70pt]{f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l}))}
+                                                  \end{multlined}\\ 
+                                            & =  \sum^{L-1}_{l=0}\sum^{N-1}_{n=0}\left(\log \lambda_{n,l} + \frac{|y_{1,n,l} - \sum_{k=\Delta_l}^{\Delta_l+K_l-1}\mathbf{g}^{H}_{k,l} \mathbf{y}_{n-k,l}|^2}{\lambda_{n,l}}\right)
+   \end{align*}
+
+   \end{itemize}
+}
+
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item{Parameter Training}
+
+   \begin{align*}
+      (1)\  \hat{\Phi} & \leftarrow \argmin_{\Phi} \mathcal{L}(\Phi, \Psi) \\
+      (2)\  \hat{\Psi} & \leftarrow \argmin_{\Psi} \mathcal{L}(\hat{\Phi}, \Psi) \\ 
+   \end{align*}
+   
+   \end{itemize}
+}
+
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+  \item{Updating Formula}
+
+   \begin{align*}
+     \hat{s}_{n,l} &= y_{1,n,l} - \hat{\bar{\mathbf{g}}}^H_l \bar{\mathbf{y}}_{n-\Delta_l,l} \\
+     \hat{\lambda}_{n,l} &= |\hat{s}_{n,l}|^2 \\
+     \hat{\bar{\mathbf{g}}}_l &= \left( \frac{\sum_{n=0}^{N-1}  \bar{\mathbf{y}}_{n-\Delta_l,l} \bar{\mathbf{y}}^H_{n-\Delta_l,l}}{\hat{\lambda}_{n,l}} \right)^{-1}
+                                             \left( \frac{\sum_{n=0}^{N-1}  \bar{\mathbf{y}}_{n-\Delta_l,l} y^{*}_{n,l}}{\hat{\lambda}_{n,l}} \right) 
+   \end{align*}
+   
+   where, 
+   
+    \begin{align*}
+     \bar{\mathbf{g}}_l  &= [\mathbf{g}^T_{\Delta_l,l}, \mathbf{g}^T_{\Delta_l+1,l}, \cdots, \mathbf{g}^T_{\Delta_l+K_l-1,l}] \\
+     \bar{\mathbf{y}}_{n,l}  &= [\mathbf{y}^T_{n,l}, \mathbf{y}^T_{n-1,l}, \cdots, \mathbf{y}^T_{n-K_l+1,l}] \\
+   \end{align*}
+   
+   \end{itemize}
+}
+
+%\section{WPE with Complex Gaussian Mixture Model(CGMM-WPE)}
+%\subsection{Model Definition}
+%\frame
+%{
+%  \frametitle{\subsecname}
+%  
+%  \begin{itemize}
+%  \item{Complex Gaussian Mixture Model}
+%      \begin{itemize}
+%        \item Circularly-symmetric Gaussian Distribution \footnote{See \href{http://www.rle.mit.edu/rgallager/documents/CircSymGauss.pdf}{this paper}.}
+%        
+%        \begin{align*}
+%             f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; \mu_{n,l,k}, \lambda_{n,l,k}) 
+%                                 & = \frac{1}{\pi\lambda_{n,l,k}}e^{-\frac{(s_{n,l} - \mu_{n,l,k})^{*}(s_{n,l} - \mu_{n,l,k})}{\lambda_{n,l,k}}}\\
+%        \end{align*}           
+%     \end{itemize}
+%   \end{itemize}
+%}
+%
+%\frame
+%{
+%  \frametitle{\subsecname}
+%  
+%  \begin{itemize}
+%  \item{Mixture Model with Zero Mean}
+%       
+%        \begin{equation*}
+%        \left\{
+%        \begin{aligned}
+%            & p(s_{n,l}; \tilde{\Phi}) = \sum_{k=1}^{K} c_{n,l,k} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; \mu_{n,l,k}, \lambda_{n,l,k}) \\
+%            & \sum_{k=1}^{K} c_{n,l,k} \mu_{n,l,k} = 0 \\
+%        \end{aligned}
+%        \right.
+%        \end{equation*}
+%        
+%  \end{itemize}
+%}
+%
+%\subsection{Training Algorithm}
+%\frame
+%{
+%  \frametitle{\subsecname}
+%  
+%  \begin{itemize}
+%  \item{Estimating CGMM Parameter with EM Algorithm}
+%
+%   \begin{align*}
+%      (1)\  \hat{\tilde{\Phi}} & \xleftarrow{\text{EM}}  \argmin_{\tilde{\Phi}} \mathcal{L}(\tilde{\Phi}, \Psi) \\
+%      (2)\  \hat{\Psi} & \leftarrow \argmin_{\Psi} \mathcal{L}(\hat{\tilde{\Phi}}, \Psi) \\ 
+%   \end{align*}
+%   
+%   \end{itemize}
+%}
+%
+%\frame
+%{
+%  \frametitle{EM Algorithm for CGMM}
+%  
+%  \begin{itemize}
+%  \item{Objective Function}
+%  
+%  Applying the method of Lagrange multiplier,
+%  
+%   \begin{align*}
+%      \mathcal{L}(\tilde{\Phi}, \Psi, \Lambda) =  \sum_{k=1}^{K} c_{n,l,k} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; \mu_{n,l,k}, \lambda_{n,l,k}) - \Lambda \sum_{k=1}^{K} c_{n,l,k} \mu_{n,l,k} \\ 
+%   \end{align*}
+%   
+%  \begin{enumerate}
+%      \item   $\gamma_{n,l,k} = \frac{c_{n,l,k} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l,k})}{\sum_{j=1}^{K} c_{n,l,j} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l,j})}$
+%      \item   $\lambda_{n,l,k} = \frac{1}{\gamma_{n,l,k} }$
+%  \end{enumerate}
+%  
+%   \end{itemize}
+%}
+%
+%\frame
+%{
+%  \frametitle{EM Algorithm for CGMM}
+%  
+%  \begin{itemize}
+%  \item{Objective Function}
+%   
+%  \begin{enumerate}
+%      \item   $\gamma_{n,l,k} = \frac{c_{n,l,k} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l,k})}{\sum_{j=1}^{K} c_{n,l,j} f_{\mathcal{N}_\mathbb{C}}(s_{n,l}; 0, \lambda_{n,l,j})}$
+%      \item   $\lambda_{n,l,k} = \frac{1}{\gamma_{n,l,k} }$
+%  \end{enumerate}
+%  
+%   \end{itemize}
+%}
+%
+
+\section{Experiments}
+\subsection{Setup}
+\frame
+{
+  \frametitle{\subsecname}
+  
+  \begin{itemize}
+    \item testset utterances as clean speech
+    
+    \item add reverberation using RIR\_DATABASE
+    
+    \item dereverberated with WPE
+  \end{itemize}
+}
+
+\subsection{Results}
+\frame
+{
+  \frametitle{\subsecname}
+  
+   \begin{itemize}
+     \item WER for ASR test
+        
+        \begin{tabular}{l|r|r|r}
+                                                      &   Clean    &    Reverb   &  DeReverb \\
+           \hline
+           \hline
+           20140801\_0508\_class1    &   1.35       &    3.82       &   2.99 \\
+           
+           20140801\_0508\_class2    &   7.44       &    15.83     &   13.29 \\
+           
+           20140902\_03\_class1        &   1.41       &    4.60       &   3.43 \\
+           
+           20140902\_03\_class2        &   3.13       &    9.17       &   6.77 \\
+        \end{tabular}
+        
+  \end{itemize}
+}
+
+\end{document}

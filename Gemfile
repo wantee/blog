@@ -23,4 +23,5 @@ group :jekyll_plugins do
   gem 'octopress-ink'
   gem 'octopress-tex2img', '>= 0.1.2'
   gem 'mini_magick'
+  gem 'jekyll-last-modified-at'
 end

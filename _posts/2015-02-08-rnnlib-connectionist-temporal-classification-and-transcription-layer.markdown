@@ -108,19 +108,25 @@ $$\begin{equation} \label{eq:path}
 p(\pi|\mathbf{x}) = \prod_{t=1}^{T}{y_{\pi_t}^{t}},\forall \pi \in L'^{T}
 \end{equation}$$
 
-To calculate \eqref{eq:obj}, we first define the forward and backward variable,
+To allow for blanks in the output paths, we first extend $\mathbf{l}$ to $\mathbf{l}'$ with blanks added to the beginning 
+and the end and inserted between every pair of labels. 
+The length of $\mathbf{l}'$ is therefore $2\|\mathbf{l}\| + 1$. 
+In calculating the probabilities of prefixes of $\mathbf{l}'$ we allow all transitions between blank and non-blank labels, 
+and also those between any pair of distinct non-blank labels(because of the map $\mathcal{B}$, the repeated labels will be merged). 
+
+Then to calculate \eqref{eq:obj}, we can define the forward and backward variable,
 
 $$\begin{equation} \label{eq:fwd}
-\alpha_t(s) = \sum_{\pi \in L^{T}:\mathcal{B}(\pi_{1\mathord{:}t})=\mathbf{l}_{1\mathord{:}s}}
+\alpha_t(s) = \sum_{\pi \in L'^{T}:\mathcal{B}(\pi_{1\mathord{:}t})=\mathbf{l}_{1\mathord{:}\frac{s}{2}}}
    {\prod_{t'=1}^{t}{y^{t'}_{\pi_{t'}}}}
 \end{equation}$$
 
 $$\begin{equation} \label{eq:bwd}
-\beta_t(s) = \sum_{\pi \in L^{T}:\mathcal{B}(\pi_{t\mathord{:}T})=\mathbf{l}_{s\mathord{:} |\mathbf{l}'|}}
+\beta_t(s) = \sum_{\pi \in L'^{T}:\mathcal{B}(\pi_{t\mathord{:}T})=\mathbf{l}_{\frac{s}{2}\mathord{:} |\mathbf{l}|}}
    {\prod_{t'=t}^{T}{y^{t'}_{\pi_{t'}}}}
 \end{equation}$$
 
-Note that the product of the forward and backward variables at a given $s$ and $t$ is the probability of all the paths corresponding to $\mathbf{l}$ that go through the symbol $s$ at time $t$, i.e.,
+where, $\frac{s}{2}$ is rounded down to an integer value. Note that the product of the forward and backward variables at a given $s$ and $t$ is the probability of all the paths corresponding to $\mathbf{l}$ that go through the symbol $\mathbf{l}'_{s}$ at time $t$, i.e.,
 
 $$\begin{equation} \label{eq:fwd_bwd_ori}
 \alpha_t(s)\beta_t(s) = \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l}):\pi_{t}=\mathbf{l}'_{s}}
@@ -140,27 +146,32 @@ $$\begin{equation} \label{eq:labelling_fwd_bwd}
 p(\mathbf{l}|\mathbf{x}) = \sum_{s=1}^{|\mathbf{l}'|}\frac{\alpha_t(s)\beta_t(s)}{y^{t}_{\mathbf{l}'_{s}}}
 \end{equation}$$
 
-On the other hand, combining \eqref{eq:labelling} and \eqref{eq:path},
-
-$$\begin{equation} \label{eq:labelling_all}
-p(\mathbf{l}|\mathbf{x}) = \sum_{\pi \in \mathcal{B}^{-1}(\mathbf{l})}{\prod_{t=1}^{T}{y_{\pi_t}^{t}}}
-\end{equation}$$
-
 Thus to differentiate this with respect to $y_k^t$ , 
 we need only consider those paths going through label $k$ at time $t$
 (derivatives of other paths is zero). 
 Noting that the same label (or blank) may be repeated several times for a single labelling $\mathbf{l}$, 
-we define the set of positions where label $k$ occurs as $lab(\mathbf{l},k) = \\{s : \mathbf{l}'_s = k\\}$, 
-which may be empty. We then differentiate \eqref{eq:labelling_all} to get,
+we define the set of positions where label $k$ occurs as $lab(\mathbf{l},k) = \\{s : \mathbf{l}'_s = k \\}$, 
+which may be empty. 
+
+Differentiating \eqref{eq:fwd_bwd}, we get,
+
+$$\begin{equation} \label{eq:fwd_bwd_drv}
+\begin{split} 
+\frac{\partial \frac{\alpha_t(s)\beta_t(s)}{y^{t}_{\mathbf{l}'_{s}}}}{\partial y_k^t} 
+  &= \left\{\begin{array}{ll}
+            \prod_{t' \neq t}{y_{\pi_{t'}}^{t'}} = \frac{\alpha_t(s)\beta_t(s)}{ {y^{t}_k}^2} & k = \mathbf{l}'_{s} \\
+            0                                   & \text{otherwise} \\
+            \end{array}
+     \right.  
+\end{split} 
+\end{equation}$$
+
+Therefore, by using notation $lab(\mathbf{l}, k)$
 
 $$\begin{equation} \label{eq:labelling_drv}
 \begin{split} 
 \frac{\partial p(\mathbf{l}|\mathbf{x})}{\partial y_k^t} 
-  &= \sum_{s \in lab(\mathbf{l}, k)}{\frac{\partial p(\pi|\mathbf{x})}{\partial y_k^t}} \\
-  &= \sum_{s \in lab(\mathbf{l}, k)}{\frac{\partial \prod_{t'=1}^{T}{y_{\pi_{t'}}^{t'}}}{\partial y_k^t}} \\
-  &= \sum_{s \in lab(\mathbf{l}, k)}{\frac{\partial y_k^t\prod_{t' \neq t}{y_{\pi_{t'}}^{t'}}}{\partial y_k^t}} \\
-  &= \sum_{s \in lab(\mathbf{l}, k)}{\prod_{t' \neq t}{y_{\pi_{t'}}^{t'}}} \\
-  &= \frac{1}{ {y^t_k}^2 } \sum_{s \in lab(\mathbf{l}, k)}{\alpha_t(s)\beta_t(s)}
+  &= \sum_{s \in lab(\mathbf{l}, k)}{\frac{\alpha_t(s)\beta_t(s)}{ {y^{t}_k}^2}}  
 \end{split} 
 \end{equation}$$
 
@@ -203,11 +214,6 @@ then, using \eqref{eq:labelling_fwd_bwd}, the $p(\mathbf{z}\|\mathbf{x})$ is can
 The last thing we have to do is calculating the forward and backward variables. We now show that by define a recursive from, 
 these variables can be calculated efficiently.
 
-Given a labelling $\mathbf{l}$, we first extend it to $\mathbf{l}'$ with blanks added to the beginning 
-and the end and inserted between every pair of labels. 
-The length of $\mathbf{l}'$ is therefore $2\|\mathbf{l}\| + 1$. 
-In calculating the probabilities of prefixes of $\mathbf{l}'$ we allow all transitions between blank and non-blank labels, 
-and also those between any pair of distinct non-blank labels(because of the map $\mathcal{B}$, the repeated labels will be merged). 
 We allow all prefixes to start with either a blank ($b$) or the first symbol in $\mathbf{l}$ ($\mathbf{l}_1$).
 
 This gives us the following rules for initialisation
@@ -275,7 +281,7 @@ But backward variables are in another form, given in Graves' [Dissertation](http
 Consider backward variable started from time $t+1$,
 
 $$\begin{equation} \label{eq:bwd_new}
-\tilde\beta_t(s) = \sum_{\pi \in L^{T}:\mathcal{B}(\pi_{t\mathord{:}T})=\mathbf{l}_{s\mathord{:} |\mathbf{l}'|}}
+\tilde\beta_t(s) = \sum_{\pi \in L'^{T}:\mathcal{B}(\pi_{t\mathord{:}T})=\mathbf{l}_{\frac{s}{2}\mathord{:} |\mathbf{l}|}}
    {\prod_{t'=t+1}^{T}{y^{t'}_{\pi_{t'}}}}
 \end{equation}$$
 

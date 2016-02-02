@@ -23,6 +23,8 @@ assets/printables/
 *.bbl
 *.blg
 *.xdv
+*.nav
+*.snm
 
 .DS_Store
 
